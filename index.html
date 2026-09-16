@@ -3,1234 +3,790 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriela Theis Marchan - Chemical Engineering & AI Portfolio</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Gabriela Theis Marchan | Chemical Engineering &amp; AI</title>
+    <meta name="description" content="Chemical Engineering PhD candidate at LSU building machine-learning and molecular-simulation pipelines for surfactant and materials design.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Public+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --ink: #14233d;
+            --muted: #56657a;
+            --rule: #d8dfe7;
+            --paper: #f4f7f9;
+            --surface: #ffffff;
+            --accent: #0b7a78;
+            --accent-soft: #d5ecea;
+            --tail: #8a97a8;
+            --display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+            --body: 'Public Sans', 'Segoe UI', system-ui, sans-serif;
+            --measure: 68ch;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ink: #e3e9f0;
+                --muted: #9aa8b8;
+                --rule: #2a3a50;
+                --paper: #0f1a2b;
+                --surface: #15233a;
+                --accent: #4cc3bd;
+                --accent-soft: #173f47;
+                --tail: #5f6f84;
+            }
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after { animation: none !important; transition: none !important; }
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            font-family: var(--body);
+            font-size: 1.0625rem;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-            overflow-x: hidden;
+            color: var(--ink);
+            background: var(--paper);
         }
 
-        .container {
-            max-width: 1200px;
+        a { color: var(--accent); text-underline-offset: 0.18em; }
+        a:hover { text-decoration-thickness: 2px; }
+        :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+        .wrap {
+            max-width: 1080px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding-inline: clamp(1rem, 4vw, 2.5rem);
         }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 50%, #9b59b6 100%);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-        }
-
-        .header-content h1 {
-            font-size: 3.2rem;
-            margin-bottom: 0.5rem;
-            animation: fadeInUp 1s ease;
-            font-weight: 700;
-        }
-
-        .header-content .tagline {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.95;
-            animation: fadeInUp 1s ease 0.2s both;
-            font-weight: 300;
-        }
-
-        .header-content .mission {
-            font-size: 1.1rem;
-            font-style: italic;
-            opacity: 0.85;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .header-stats {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 2rem;
-            animation: fadeInUp 1s ease 0.6s both;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        h1, h2, h3 {
+            font-family: var(--display);
+            line-height: 1.15;
+            margin: 0;
         }
 
         /* Navigation */
-        nav {
-            background: white;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        .site-nav {
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 10;
+            background: color-mix(in srgb, var(--paper) 90%, transparent);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--rule);
         }
 
-        .nav-container {
+        .site-nav .wrap {
             display: flex;
-            justify-content: center;
-            padding: 1rem 0;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 3.5rem;
         }
 
-        .nav-links {
+        .brand {
+            font-family: var(--display);
+            font-weight: 700;
+            color: var(--ink);
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .site-nav ul {
             display: flex;
+            gap: 0.25rem;
             list-style: none;
-            gap: 0.5rem;
             margin: 0;
             padding: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            position: relative;
         }
 
-        .nav-links li {
-            margin: 0;
-        }
-
-        .nav-links a {
+        .site-nav ul a {
+            display: block;
+            padding: 0.4rem 0.7rem;
+            border-radius: 999px;
+            color: var(--muted);
             text-decoration: none;
-            color: #2c3e50;
-            font-weight: 600;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            display: block;
-            background: #f8f9fa;
-            border: 2px solid transparent;
-            text-align: center;
-            min-width: 120px;
+            font-size: 0.95rem;
+            white-space: nowrap;
         }
 
-        .nav-links a:hover {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-            border-color: transparent;
+        .site-nav ul a:hover { color: var(--ink); }
+        .site-nav ul a[aria-current="true"] { color: var(--accent); background: var(--accent-soft); }
+
+        /* Hero */
+        .hero {
+            padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 6vw, 4.5rem);
+            border-bottom: 1px solid var(--rule);
         }
 
-        .nav-links a.active {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
-        }
-
-        /* Loading Animation */
-        .loading {
-            text-align: center;
-            padding: 3rem;
-            color: #3498db;
-            display: none;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        .loading i {
-            animation: spin 1s linear infinite;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .loading p {
-            font-size: 1.1rem;
-            opacity: 0.8;
-        }
-
-        /* Main Content */
-        main {
-            padding: 2rem 0;
-        }
-
-        .section {
-            background: white;
-            margin-bottom: 2rem;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-            display: none;
-            animation: fadeIn 0.5s ease;
-            border-top: 4px solid transparent;
-            background-clip: padding-box;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            border-radius: 15px 15px 0 0;
-        }
-
-        .section h2 {
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 2rem;
-            font-size: 2.2rem;
-            font-weight: 700;
-            position: relative;
-            padding-bottom: 1rem;
-        }
-
-        .section h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            border-radius: 2px;
-        }
-
-        /* About Section */
-        .about-content {
+        .hero .wrap {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 3rem;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+            gap: clamp(2rem, 5vw, 4rem);
             align-items: center;
         }
 
-        .profile-section {
-            text-align: center;
+        .hero h1 {
+            font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
 
-        .profile-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
+        .hero .role {
+            font-family: var(--display);
+            font-weight: 500;
+            font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+            color: var(--muted);
+            margin: 0.75rem 0 1.25rem;
+        }
+
+        .hero .lede {
+            max-width: 52ch;
+            margin: 0 0 1.75rem;
+        }
+
+        .actions {
             display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .button {
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-            margin: 0 auto 1.5rem;
-            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
-            overflow: hidden;  /* ADD THIS */
-            position: relative;
+            gap: 0.5rem;
+            padding: 0.6rem 1.05rem;
+            border-radius: 999px;
+            border: 1px solid var(--rule);
+            background: var(--surface);
+            color: var(--ink);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
         }
 
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            border-radius: 50%;
+        .button:hover { border-color: var(--accent); color: var(--accent); }
+
+        .button.primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--surface);
+        }
+
+        .button.primary:hover { filter: brightness(1.1); color: var(--surface); }
+
+        /* Molecule graph */
+        .molecule figure { margin: 0; }
+
+        .molecule svg {
             display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
         }
 
-        .profile-image i {
-            display: none; 
-            position: relative;
-            z-index: 1;
+        .molecule .edge { stroke: var(--rule); stroke-width: 3; stroke-linecap: round; }
+        .molecule .node { stroke: var(--paper); stroke-width: 3; }
+        .molecule .tail { fill: var(--tail); }
+        .molecule .head { fill: var(--accent); }
+        .molecule .interface { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 6; opacity: 0.6; }
+        .molecule .water { fill: var(--accent-soft); }
+        .molecule text { font-family: var(--body); font-size: 11px; fill: var(--muted); }
+
+        /* One message-passing sweep from tail to head on load */
+        .molecule .tail {
+            animation: pass 0.9s ease-out both;
+            animation-delay: calc(var(--i) * 90ms + 400ms);
         }
 
-        .contact-links {
+        @keyframes pass {
+            0%   { fill: var(--tail); r: var(--r); }
+            40%  { fill: var(--accent); r: calc(var(--r) * 1.5); }
+            100% { fill: var(--tail); r: var(--r); }
+        }
+
+        .molecule figcaption {
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        /* Sections */
+        section {
+            padding-block: clamp(3rem, 7vw, 5rem);
+            border-bottom: 1px solid var(--rule);
+            scroll-margin-top: 3.5rem;
+        }
+
+        section:last-of-type { border-bottom: 0; }
+
+        .section-head {
+            display: grid;
+            grid-template-columns: 14rem minmax(0, 1fr);
+            gap: 2rem;
+        }
+
+        .section-head h2 {
+            font-size: clamp(1.6rem, 3vw, 2rem);
+            font-weight: 700;
+        }
+
+        .section-head .intro {
+            color: var(--muted);
+            max-width: var(--measure);
+            margin: 0.35rem 0 0;
+        }
+
+        .section-body { margin-top: 2rem; }
+
+        @media (min-width: 861px) {
+            .section-body { margin-left: 16rem; }
+            .section-head .intro { margin: 0.35rem 0 0; }
+        }
+
+        /* About */
+        .about {
+            display: grid;
+            grid-template-columns: 11rem minmax(0, 1fr);
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .portrait {
+            width: 11rem;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--accent-soft);
+            max-width: 100%;
+        }
+
+        .about p { max-width: var(--measure); margin: 0 0 1rem; }
+
+        .facts {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0 0;
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .facts li { display: flex; gap: 0.75rem; align-items: baseline; }
+        .facts i { width: 1.1rem; color: var(--accent); text-align: center; }
+
+        /* Research */
+        .research {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1px;
+            background: var(--rule);
+            border: 1px solid var(--rule);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .research article {
+            background: var(--surface);
+            padding: 1.5rem;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            margin-top: 1.5rem;
+            gap: 0.6rem;
         }
 
-        .contact-links a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
+        .research article.lead { grid-column: 1 / -1; }
 
-        .contact-links a:hover {
-            background: #f8f9fa;
-            transform: translateX(5px);
-        }
+        .research h3 { font-size: 1.2rem; font-weight: 700; }
+        .research p { margin: 0; }
 
-        .about-text h3 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.5rem;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            text-align: justify;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .research-focus {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-top: 2rem;
-            border-left: 4px solid #3498db;
-        }
-
-        /* Education Section */
-        .education-item {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border-left: 6px solid #3498db;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .education-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100px;
-            height: 100px;
-            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(155, 89, 182, 0.1));
-            border-radius: 50%;
-            transform: translate(30px, -30px);
-        }
-
-        .education-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
-
-        .education-header h4 {
-            color: #2c3e50;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-date {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .gpa {
-            color: #27ae60;
-            font-weight: 600;
-            margin-top: 0.5rem;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-category {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 6px solid #3498db;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-        }
-
-        .skill-category h4 {
-            color: #2c3e50;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .skill-tag {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
-        }
-
-        /* Experience Section */
-        .experience-item {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border-left: 6px solid #3498db;
-            position: relative;
-            transition: transform 0.3s ease;
-        }
-
-        .experience-item:hover {
-            transform: translateX(10px);
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1.5rem;
-        }
-
-        .experience-header h4 {
-            color: #2c3e50;
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-date {
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .experience-description {
-            line-height: 1.8;
-        }
-
-        .experience-description ul {
-            margin-top: 1rem;
-            padding-left: 1.5rem;
-        }
-
-        .experience-description li {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #e9ecef;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(135deg, #3498db, #9b59b6);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-        }
-
-        .project-status {
-            background: linear-gradient(135deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
+        .status {
+            align-self: flex-start;
             font-size: 0.8rem;
             font-weight: 600;
-            display: inline-block;
-            margin-bottom: 1rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent);
         }
 
-        .project-status.ongoing {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+        .status.published { background: transparent; border: 1px solid var(--rule); color: var(--muted); }
+
+        .result { font-weight: 600; }
+
+        .tools {
+            margin-top: auto;
+            padding-top: 0.4rem;
+            font-size: 0.9rem;
+            color: var(--muted);
         }
 
-        .project-card h4 {
-            color: #2c3e50;
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
+        /* Experience timeline */
+        .timeline {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-left: 2px solid var(--rule);
         }
 
-        .project-description {
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
+        .timeline > li {
+            position: relative;
+            padding: 0 0 2.25rem 1.75rem;
         }
 
-        .project-tech {
-            margin-bottom: 1.5rem;
+        .timeline > li:last-child { padding-bottom: 0; }
+
+        .timeline > li::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0.45rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--paper);
+            border: 2px solid var(--accent);
         }
 
-        .project-tech strong {
-            color: #3498db;
+        .timeline h3 { font-size: 1.2rem; font-weight: 700; }
+
+        .when {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.2rem;
         }
 
-        .project-impact {
-            background: rgba(52, 152, 219, 0.1);
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            border-left: 3px solid #3498db;
-        }
+        .where { margin: 0.15rem 0 0; color: var(--muted); }
 
-        .project-links {
-            display: flex;
+        .timeline ul { margin: 0.6rem 0 0; padding-left: 1.1rem; max-width: var(--measure); }
+        .timeline ul li { margin-bottom: 0.35rem; }
+
+        /* Publications */
+        .pubs { list-style: none; margin: 0; padding: 0; }
+
+        .pubs li {
+            display: grid;
+            grid-template-columns: 3.5rem minmax(0, 1fr);
             gap: 1rem;
-            flex-wrap: wrap;
+            padding: 1.1rem 0;
+            border-top: 1px solid var(--rule);
         }
 
-        .project-links a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            border: 2px solid #3498db;
+        .pubs li:first-child { border-top: 0; padding-top: 0; }
+
+        .pubs .year { font-family: var(--display); font-weight: 700; color: var(--muted); }
+        .pubs .title { font-weight: 600; max-width: var(--measure); }
+        .pubs .title a { color: var(--ink); }
+        .pubs .title a:hover { color: var(--accent); }
+        .pubs .authors { margin: 0.25rem 0 0; color: var(--muted); font-size: 0.95rem; }
+        .pubs .authors strong { color: var(--ink); font-weight: 600; }
+
+        /* Education and skills */
+        .rows { margin: 0; }
+
+        .rows > div {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 0.25rem 1.5rem;
+            padding: 1.1rem 0;
+            border-top: 1px solid var(--rule);
         }
 
-        .project-links a:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
+        .rows > div:first-child { border-top: 0; padding-top: 0; }
+
+        .rows dt { font-weight: 600; }
+        .rows dd { margin: 0; }
+        .rows .date { color: var(--muted); white-space: nowrap; grid-row: 1; grid-column: 2; }
+        .rows .detail { grid-column: 1 / -1; color: var(--muted); }
+
+        .skills > div { grid-template-columns: 14rem minmax(0, 1fr); }
+        .skills dd { max-width: var(--measure); }
+
+        footer {
+            padding-block: 2.5rem;
+            border-top: 1px solid var(--rule);
+            color: var(--muted);
+            font-size: 0.9rem;
         }
 
-        /* Publications Section */
-        .publication-item {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            border-left: 6px solid #9b59b6;
-            transition: transform 0.3s ease;
+        footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+
+        /* Narrow screens */
+        @media (max-width: 860px) {
+            .hero .wrap { grid-template-columns: 1fr; }
+            .section-head { grid-template-columns: 1fr; gap: 0; }
+            .research { grid-template-columns: 1fr; }
+            .skills > div { grid-template-columns: 1fr; }
+            .brand { display: none; }
+            .site-nav .wrap { justify-content: flex-start; }
         }
 
-        .publication-item:hover {
-            transform: translateX(10px);
-        }
-
-        .publication-title {
-            color: #2c3e50;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .publication-authors {
-            color: #7f8c8d;
-            margin-bottom: 0.5rem;
-            font-style: italic;
-        }
-
-        .publication-journal {
-            color: #3498db;
-            font-weight: 600;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .header-stats {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
-
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 1rem;
-                justify-content: center;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-header,
-            .education-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .section {
-                padding: 1.5rem;
-            }
+        @media (max-width: 560px) {
+            .about { grid-template-columns: 1fr; }
+            .portrait { width: 8rem; }
+            .rows > div { grid-template-columns: 1fr; }
+            .rows .date { grid-row: auto; grid-column: 1; }
+            .pubs li { grid-template-columns: 1fr; gap: 0.2rem; }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <h1>Gabriela Theis Marchan</h1>
-                <p class="tagline">PhD Chemical Engineering | Machine Learning Researcher | Materials Scientist</p>
-                <p class="mission">"Integrating computational techniques with engineering principles to drive sustainable advancements in materials science"</p>
-                <div class="header-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">4</span>
-                        <span class="stat-label">Publications</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">6+</span>
-                        <span class="stat-label">Active Projects</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">3.6</span>
-                        <span class="stat-label">PhD GPA</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <nav>
-        <div class="nav-container">
-            <ul class="nav-links">
-                <li><a href="#about" class="nav-link active">About</a></li>
-                <li><a href="#education" class="nav-link">Education</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#publications" class="nav-link">Publications</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
+    <nav class="site-nav" aria-label="Sections">
+        <div class="wrap">
+            <a class="brand" href="#top">Gabriela Theis Marchan</a>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
             </ul>
         </div>
     </nav>
 
-    <main>
-        <div class="container">
-            <!-- Loading Animation -->
-            <div id="loading" class="loading">
-                <i class="fas fa-atom"></i>
-                <p>Loading section...</p>
+    <header class="hero" id="top">
+        <div class="wrap">
+            <div>
+                <h1>Gabriela Theis Marchan</h1>
+                <p class="role">Chemical Engineering PhD candidate, Louisiana State University</p>
+                <p class="lede">I build machine-learning and molecular-simulation pipelines that predict molecular properties and optimize design for surfactants and materials.</p>
+                <div class="actions">
+                    <a class="button primary" href="mailto:gtheis2@lsu.edu"><i class="fas fa-envelope" aria-hidden="true"></i> Email me</a>
+                    <a class="button" href="https://www.linkedin.com/in/gabriela-theis-marchan/" target="_blank" rel="noopener"><i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn</a>
+                    <a class="button" href="https://github.com/gabi107" target="_blank" rel="noopener"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a>
+                </div>
             </div>
 
-            <!-- About Section -->
-            <section id="about" class="section active">
-                <h2><i class="fas fa-user-graduate"></i> About Me</h2>
-                <div class="about-content">
-                    <div class="profile-section">
-                        <div class="profile-image">
-                            <img src="images/headshot.png" alt="Gabriela Theis Marchan" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <i class="fas fa-atom"></i>
-                        </div>
-                        <div class="contact-links">
-                            <a href="mailto:gtheis2@lsu.edu">
-                                <i class="fas fa-envelope"></i> gtheis2@lsu.edu
-                            </a>
-                            <a href="https://www.linkedin.com/in/gabriela-theis-marchan/" target="_blank">
-                                <i class="fab fa-linkedin"></i> LinkedIn
-                            </a>
-                            <a href="tel:+19856621755">
-                                <i class="fas fa-phone"></i> (985) 662-1755
-                            </a>
-                            <a href="#" target="_blank">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                    <div class="about-text">
-                        <h3>Passionate Chemical Engineer & AI Researcher</h3>
-                        <p>
-                            I'm a dedicated PhD Chemical Engineering student at Louisiana State University with a passion for integrating machine learning and computational techniques with traditional engineering principles. My research focuses on developing innovative solutions for sustainable advancements in materials science and separation systems.
-                        </p>
-                        <p>
-                            With expertise spanning molecular dynamics, graph neural networks, and advanced data analysis, I bridge the gap between theoretical research and practical applications. My work has contributed to cutting-edge publications in industrial engineering and catalysis, demonstrating the power of interdisciplinary approaches.
-                        </p>
-                        <p>
-                            Currently, I'm actively seeking internship opportunities where I can leverage my advanced machine learning and data analysis skills to drive innovative solutions in the materials science and chemical engineering sectors.
-                        </p>
-                        <div class="research-focus">
-                            <h4><i class="fas fa-microscope"></i> Research Focus</h4>
-                            <p>Electrically-driven separation systems, Graph Neural Networks for molecular property prediction, Variational Autoencoders for data augmentation, and sustainable catalyst development.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="molecule">
+                <figure>
+                    <!-- A surfactant as a graph: hydrophobic carbon tail (grey) and sulfate head group (accent) at the air/water interface -->
+                    <svg viewBox="0 20 400 200" role="img" aria-label="Graph of a surfactant molecule with its carbon tail in air and its sulfate head group in water">
+                        <rect class="water" x="290" y="20" width="110" height="200" rx="0" opacity="0.5"/>
+                        <line class="interface" x1="290" y1="24" x2="290" y2="216"/>
+                        <text x="280" y="210" text-anchor="end">air</text>
+                        <text x="300" y="210">water</text>
 
-            <!-- Education Section -->
-            <section id="education" class="section">
-                <h2><i class="fas fa-graduation-cap"></i> Education</h2>
-                <div class="education-item">
-                    <div class="education-header">
-                        <div>
-                            <h4>PhD in Chemical Engineering</h4>
-                            <p><strong>Louisiana State University</strong> - Baton Rouge, LA</p>
-                            <p class="gpa">GPA: 3.6 | Advisor: Dr. Jose Romagnoli</p>
-                        </div>
-                        <span class="education-date">Present - Dec 2026</span>
-                    </div>
-                    <p>Specializing in machine learning applications for chemical engineering, with focus on electrically-driven separation systems and molecular dynamics modeling.</p>
-                </div>
+                        <g>
+                            <line class="edge" x1="20" y1="110" x2="44" y2="130"/>
+                            <line class="edge" x1="44" y1="130" x2="68" y2="110"/>
+                            <line class="edge" x1="68" y1="110" x2="92" y2="130"/>
+                            <line class="edge" x1="92" y1="130" x2="116" y2="110"/>
+                            <line class="edge" x1="116" y1="110" x2="140" y2="130"/>
+                            <line class="edge" x1="140" y1="130" x2="164" y2="110"/>
+                            <line class="edge" x1="164" y1="110" x2="188" y2="130"/>
+                            <line class="edge" x1="188" y1="130" x2="212" y2="110"/>
+                            <line class="edge" x1="212" y1="110" x2="236" y2="130"/>
+                            <line class="edge" x1="236" y1="130" x2="260" y2="110"/>
+                            <line class="edge" x1="260" y1="110" x2="284" y2="130"/>
+                            <line class="edge" x1="284" y1="130" x2="312" y2="118"/>
+                            <line class="edge" x1="312" y1="118" x2="344" y2="120"/>
+                            <line class="edge" x1="344" y1="120" x2="344" y2="86"/>
+                            <line class="edge" x1="344" y1="120" x2="344" y2="154"/>
+                            <line class="edge" x1="344" y1="120" x2="378" y2="120"/>
+                        </g>
 
-                <div class="education-item">
-                    <div class="education-header">
-                        <div>
-                            <h4>Master of Science in Integrated Science and Technology (ISAT)</h4>
-                            <p><strong>Southeastern Louisiana University</strong> - Hammond, LA</p>
-                            <p><strong>Major:</strong> Industrial Chemistry</p>
-                            <p class="gpa">GPA: 4.0</p>
-                        </div>
-                        <span class="education-date">Dec 2022</span>
-                    </div>
-                    <p>Perfect GPA achievement with focus on catalyst synthesis and cross dehydrogenative coupling reactions using nanodispersive catalysts.</p>
-                </div>
-
-                <div class="education-item">
-                    <div class="education-header">
-                        <div>
-                            <h4>Bachelor of Science in Materials Science and Engineering</h4>
-                            <p><strong>Universidad Central de Venezuela</strong> - Caracas, Venezuela</p>
-                        </div>
-                        <span class="education-date">Jul 2017</span>
-                    </div>
-                    <p>Foundation in materials science with strong emphasis on material characterization and engineering principles.</p>
-                </div>
-            </section>
-
-            <!-- Experience Section -->
-            <section id="experience" class="section">
-                <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
-                
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h4>Graduate Research Assistant</h4>
-                            <p><strong>Louisiana State University</strong> - Baton Rouge, LA</p>
-                            <p><em>Advisors: Dr. Jose Romagnoli, Dr. Ravati Kumar</em></p>
-                        </div>
-                        <span class="experience-date">Mar 2023 - Present</span>
-                    </div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Integrated Machine Learning and Molecular dynamics in the design of electrically-driven separation systems</li>
-                            <li>Developed models using unsupervised learning tools for dimensionality reduction and clustering</li>
-                            <li>Collaborated with multi-disciplinary team to optimize separation processes using deep learning techniques (GNN, ANN, DNN)</li>
-                            <li>Implemented version control practices using Git for collaborative research projects</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h4>Teaching Assistant</h4>
-                            <p><strong>Louisiana State University</strong> - Baton Rouge, LA</p>
-                            <p><em>TA for Prof. Morgan, Dr. Benton, Dr. Plaisance, Dr. Romagnoli</em></p>
-                        </div>
-                        <span class="experience-date">Jan 2023 - Present</span>
-                    </div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Supported undergraduate courses in thermodynamics, genetic engineering, chemical reaction engineering and process control</li>
-                            <li>Conducted office hours and tutorials, improving students' understanding of complex engineering principles</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h4>QC Lab Intern</h4>
-                            <p><strong>Bercen Chemicals, LLC CHC</strong> - Louisiana</p>
-                            <p><em>Mentor: Ms. Tiffany Adkins</em></p>
-                        </div>
-                        <span class="experience-date">Jun 2022 - Aug 2022</span>
-                    </div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Utilized various analytical techniques (GC, FTIR, HPLC, Elemental Analysis) for quality control</li>
-                            <li>Developed analytical methodology to support production processes</li>
-                            <li>Assisted in testing products and developing processes for new pilot plant operations</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="experience-item">
-                    <div class="experience-header">
-                        <div>
-                            <h4>Graduate Research Assistant</h4>
-                            <p><strong>Southeastern Louisiana University</strong> - Hammond, LA</p>
-                            <p><em>Advisor: Dr. Jean Fotie</em></p>
-                        </div>
-                        <span class="experience-date">May 2021 - Dec 2022</span>
-                    </div>
-                    <div class="experience-description">
-                        <ul>
-                            <li>Conducted cross dehydrogenative coupling synthesis reactions using nano dispersive palladium, platinum, and cobalt catalysts</li>
-                            <li>Collaborated on publications highlighting advancements in catalysis and material science</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
-            <section id="projects" class="section">
-                <h2><i class="fas fa-flask"></i> Featured Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <span class="project-status">Published</span>
-                        <h4>Graph-Based Modeling for Ion Activity Coefficient Prediction</h4>
-                        <p class="project-description">
-                            Developed a novel GNN model to predict ion activity in polymeric ion-exchange membranes, combining molecular dynamics simulations with graph neural networks.
-                        </p>
-                        <div class="project-tech">
-                            <strong>Technologies:</strong> Python, PyTorch, GCN, Molecular Dynamics simulations, Saliency analysis
-                        </div>
-                        <div class="project-impact">
-                            <strong>Results:</strong> Both models achieved high predictive accuracy (R² > 0.98 for train and test sets). The MD descriptors model demonstrated superior robustness across diverse hyperparameter configurations.
-                        </div>
-                        <div class="project-links">
-                            <a href="https://doi.org/10.1021/acs.iecr.4c02469" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Publication
-                            </a>
-                            <a href="#">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <span class="project-status ongoing">Ongoing</span>
-                        <h4>Graph-Based Models for Log CMC Prediction in Surfactants</h4>
-                        <p class="project-description">
-                            Comparative study of three graph-based machine learning models (GCN, GAT, PharmHGT) for predicting critical micelle concentration (LogCMC) of surfactants.
-                        </p>
-                        <div class="project-tech">
-                            <strong>Technologies:</strong> Python, PyTorch, Graph Neural Networks (GCN, GAT), Transformer-Based Models (PharmHGT)
-                        </div>
-                        <div class="project-impact">
-                            <strong>Impact:</strong> Identifying the most suitable graph-based model for predicting surfactant properties, enabling more efficient design of surfactants for detergents, emulsifiers, and drug delivery.
-                        </div>
-                        <div class="project-links">
-                            <a href="#">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                            <a href="#">
-                                <i class="fas fa-file-alt"></i> Manuscript
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <span class="project-status ongoing">Ongoing</span>
-                        <h4>VAE-Assisted Data Augmentation for GNNs</h4>
-                        <p class="project-description">
-                            Implemented Variational Autoencoders to augment limited molecular data for Graph Neural Network training in low-data regimes, improving model generalization.
-                        </p>
-                        <div class="project-tech">
-                            <strong>Technologies:</strong> Python, PyTorch, RDKit, GAT, MPNN, GCN, Variational Autoencoders
-                        </div>
-                        <div class="project-impact">
-                            <strong>Impact:</strong> Enables accurate predictions in low-data regimes, significantly improving model generalization for molecular property prediction tasks.
-                        </div>
-                        <div class="project-links">
-                            <a href="#">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                            <a href="#">
-                                <i class="fas fa-chart-line"></i> Results
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <span class="project-status ongoing">Ongoing</span>
-                        <h4>ML-Enhanced Surfactant Adsorption Prediction</h4>
-                        <p class="project-description">
-                            Developed a pipeline combining machine learning and molecular dynamics to predict the standard Gibbs free energy of adsorption for surfactants at interfaces.
-                        </p>
-                        <div class="project-tech">
-                            <strong>Technologies:</strong> Python, PyTorch, RDKit, GROMACS, Free Energy Perturbation (FEP), Graph Neural Networks
-                        </div>
-                        <div class="project-impact">
-                            <strong>Potential Impact:</strong> Enables accurate, scalable prediction of surfactant adsorption behavior, accelerating design of efficient surfactants for detergency, emulsification, and pharmaceutical applications.
-                        </div>
-                        <div class="project-links">
-                            <a href="#">
-                                <i class="fab fa-github"></i> GitHub
-                            </a>
-                            <a href="#">
-                                <i class="fas fa-microscope"></i> Methods
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <span class="project-status">Completed</span>
-                        <h4>Nano-Dispersed Catalysts for Sustainable Chemistry</h4>
-                        <p class="project-description">
-                            Master's thesis project on nano-dispersed metals in organically modified silicate as sustainable catalysts for cross-dehydrogenative couplings.
-                        </p>
-                        <div class="project-tech">
-                            <strong>Technologies:</strong> GC-MS, NMR, FTIR, Elemental Analysis, Catalyst synthesis, Spectroscopy
-                        </div>
-                        <div class="project-impact">
-                            <strong>Achievement:</strong> Completed with 4.0 GPA and contributed to multiple peer-reviewed publications in catalysis and materials science.
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.proquest.com/docview/2741031698" target="_blank">
-                                <i class="fas fa-book"></i> Thesis
-                            </a>
-                            <a href="#">
-                                <i class="fas fa-flask"></i> Methods
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Publications Section -->
-            <section id="publications" class="section">
-                <h2><i class="fas fa-book-open"></i> Publications</h2>
-                
-                <div class="publication-item">
-                    <div class="publication-title">
-                        Graph-Based Modeling and Molecular Dynamics for Ion Activity Coefficient Prediction in Polymeric Ion-Exchange Membranes
-                    </div>
-                    <div class="publication-authors">
-                        Naghshnejad, P., <strong>Marchan, G. T.</strong>, Olayiwola, T., Romagnoli, J., & Kumar, R. (2024)
-                    </div>
-                    <div class="publication-journal">
-                        <a href="https://doi.org/10.1021/acs.iecr.4c02469" target="_blank">Industrial & Engineering Chemistry Research</a>
-                    </div>
-                </div>
-
-                <div class="publication-item">
-                    <div class="publication-title">
-                        Palladium Nano-Dispersed and Stabilized in Organically Modified Silicate as a Heterogeneous Catalyst for the Conversion of Aldehydes into O-Silyl Ether Derivatives under Neat Conditions
-                    </div>
-                    <div class="publication-authors">
-                        Matherne, C. M., Wroblewski, J. E., Drago, H. S., <strong>Marchan, G. T.</strong>, Young, A. R., Kingsley, N., ... & Fotie, J. (2024)
-                    </div>
-                    <div class="publication-journal">
-                        <a href="https://www.thieme-connect.com/products/ejournals/html/10.1055/a-2326-6277" target="_blank">Synthesis</a>
-                    </div>
-                </div>
-
-                <div class="publication-item">
-                    <div class="publication-title">
-                        Nano-Dispersed Metals in Organically Modified Silicate as Sustainable Catalysts for Cross-Dehydrogenative Couplings
-                    </div>
-                    <div class="publication-authors">
-                        <strong>Marchan, G. T.</strong> (2022)
-                    </div>
-                    <div class="publication-journal">
-                        <a href="https://www.proquest.com/docview/2741031698" target="_blank">Master's Thesis, Southeastern Louisiana University - ProQuest</a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Skills Section -->
-            <section id="skills" class="section">
-                <h2><i class="fas fa-cogs"></i> Technical Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h4><i class="fas fa-brain"></i> AI/Machine Learning</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">PyTorch</span>
-                            <span class="skill-tag">Keras</span>
-                            <span class="skill-tag">TensorFlow</span>
-                            <span class="skill-tag">Graph Neural Networks</span>
-                            <span class="skill-tag">Variational Autoencoders</span>
-                            <span class="skill-tag">Active Learning</span>
-                            <span class="skill-tag">Transformers</span>
-                            <span class="skill-tag">t-SNE/UMAP</span>
-                            <span class="skill-tag">DBSCAN/HDBSCAN</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h4><i class="fas fa-code"></i> Programming & Tools</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Python</span>
-                            <span class="skill-tag">MATLAB</span>
-                            <span class="skill-tag">Git</span>
-                            <span class="skill-tag">LAMMPS</span>
-                            <span class="skill-tag">Jupyter Notebook</span>
-                            <span class="skill-tag">NumPy</span>
-                            <span class="skill-tag">Pandas</span>
-                            <span class="skill-tag">Scikit-learn</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h4><i class="fas fa-chart-bar"></i> Data Analysis & Visualization</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Data Mining</span>
-                            <span class="skill-tag">Data Science</span>
-                            <span class="skill-tag">Matplotlib</span>
-                            <span class="skill-tag">Excel</span>
-                            <span class="skill-tag">Statistical Analysis</span>
-                            <span class="skill-tag">Experimental Design</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h4><i class="fas fa-flask"></i> Chemistry & Engineering</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">GC-MS</span>
-                            <span class="skill-tag">NMR</span>
-                            <span class="skill-tag">FTIR</span>
-                            <span class="skill-tag">HPLC</span>
-                            <span class="skill-tag">Elemental Analysis</span>
-                            <span class="skill-tag">Catalyst Synthesis</span>
-                            <span class="skill-tag">Nanocrystal Synthesis</span>
-                            <span class="skill-tag">Spectroscopy</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h4><i class="fas fa-atom"></i> Computational Chemistry</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Molecular Dynamics</span>
-                            <span class="skill-tag">GROMACS</span>
-                            <span class="skill-tag">Numerical Modeling</span>
-                            <span class="skill-tag">Free Energy Perturbation</span>
-                            <span class="skill-tag">RDKit</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category">
-                        <h4><i class="fas fa-users"></i> Professional Skills</h4>
-                        <div class="skill-tags">
-                            <span class="skill-tag">Quantitative Research</span>
-                            <span class="skill-tag">Mentoring</span>
-                            <span class="skill-tag">Technical Writing</span>
-                            <span class="skill-tag">Project Management</span>
-                            <span class="skill-tag">Cross-disciplinary Collaboration</span>
-                            <span class="skill-tag">Teaching</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        <g>
+                            <circle class="node tail" cx="20"  cy="110" r="7" style="--i:0;--r:7px"/>
+                            <circle class="node tail" cx="44"  cy="130" r="7" style="--i:1;--r:7px"/>
+                            <circle class="node tail" cx="68"  cy="110" r="7" style="--i:2;--r:7px"/>
+                            <circle class="node tail" cx="92"  cy="130" r="7" style="--i:3;--r:7px"/>
+                            <circle class="node tail" cx="116" cy="110" r="7" style="--i:4;--r:7px"/>
+                            <circle class="node tail" cx="140" cy="130" r="7" style="--i:5;--r:7px"/>
+                            <circle class="node tail" cx="164" cy="110" r="7" style="--i:6;--r:7px"/>
+                            <circle class="node tail" cx="188" cy="130" r="7" style="--i:7;--r:7px"/>
+                            <circle class="node tail" cx="212" cy="110" r="7" style="--i:8;--r:7px"/>
+                            <circle class="node tail" cx="236" cy="130" r="7" style="--i:9;--r:7px"/>
+                            <circle class="node tail" cx="260" cy="110" r="7" style="--i:10;--r:7px"/>
+                            <circle class="node tail" cx="284" cy="130" r="7" style="--i:11;--r:7px"/>
+                            <circle class="node head" cx="312" cy="118" r="8"/>
+                            <circle class="node head" cx="344" cy="120" r="11"/>
+                            <circle class="node head" cx="344" cy="86"  r="8"/>
+                            <circle class="node head" cx="344" cy="154" r="8"/>
+                            <circle class="node head" cx="378" cy="120" r="8"/>
+                        </g>
+                    </svg>
+                    <figcaption>A surfactant as a graph neural network sees it: atoms are nodes and bonds are edges.</figcaption>
+                </figure>
+            </div>
         </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>About</h2>
+                </div>
+                <div class="section-body about">
+                    <img class="portrait" src="images/headshot.png" alt="Portrait of Gabriela Theis Marchan" width="176" height="176">
+                    <div>
+                        <p>I'm a Chemical Engineering PhD candidate at Louisiana State University, expected to graduate in May 2027. I work in the Process Systems Engineering group, advised by Dr. José Romagnoli and Dr. Revati Kumar.</p>
+                        <p>My work combines AI-driven modeling, optimization and data science with chemical engineering, materials science and molecular simulation. I've published high-accuracy property-prediction models and I'm now building generative design tools for surfactants.</p>
+                        <p>I'm looking to apply advanced modeling and data science to real industrial problems, including energy efficiency and lower-carbon solutions, in a rotational early-career research program.</p>
+                        <ul class="facts">
+                            <li><i class="fas fa-location-dot" aria-hidden="true"></i> Louisiana, United States</li>
+                            <li><i class="fas fa-circle-check" aria-hidden="true"></i> Authorized to work in the U.S. without sponsorship</li>
+                            <li><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:gtheis2@lsu.edu">gtheis2@lsu.edu</a></li>
+                            <li><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+19856621755">(985) 662-1755</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="research">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Research</h2>
+                    <p class="intro">Machine learning on molecular graphs, grounded in molecular dynamics and aimed at design problems with limited experimental data.</p>
+                </div>
+                <div class="section-body research">
+                    <article class="lead">
+                        <span class="status">Ongoing</span>
+                        <h3>AI-driven surfactant design</h3>
+                        <p>A generative AI and reinforcement learning framework that proposes new surfactant molecules. Multi-objective reward functions and property-specific graph neural network predictors target critical micelle concentration and surface tension at the same time.</p>
+                        <p class="tools">Generative models, reinforcement learning, GNNs, PyTorch, RDKit</p>
+                    </article>
+
+                    <article>
+                        <span class="status published">Published 2026</span>
+                        <h3>Predicting critical micelle concentration</h3>
+                        <p>Graph-based models that predict the critical micelle concentration of surfactants, comparing GCN, GAT and transformer-based architectures.</p>
+                        <p class="result">R² ≈ 0.94</p>
+                        <p class="tools">Computational Materials Science</p>
+                    </article>
+
+                    <article>
+                        <span class="status published">Published 2025–2026</span>
+                        <h3>Data augmentation for low-data regimes</h3>
+                        <p>Variational autoencoders generate extra molecular training data for graph neural networks. A semi-supervised extension improves surface tension prediction from small experimental datasets.</p>
+                        <p class="tools">Chemical Engineering Transactions, Systems and Control Transactions</p>
+                    </article>
+
+                    <article>
+                        <span class="status published">Published 2024</span>
+                        <h3>Ion activity in ion-exchange membranes</h3>
+                        <p>Graph neural networks combined with molecular-dynamics descriptors predict ion activity coefficients in polymeric ion-exchange membranes, for electrically driven separations.</p>
+                        <p class="result">R² &gt; 0.98 on train and test sets</p>
+                        <p class="tools">Industrial &amp; Engineering Chemistry Research</p>
+                    </article>
+
+                    <article>
+                        <span class="status">Ongoing</span>
+                        <h3>Agentic AI literature review</h3>
+                        <p>An LLM-agent pipeline for a systematic review of heavy-metal removal in wastewater treatment. It automates literature discovery, screening and structured data extraction.</p>
+                        <p class="tools">LLM agents, LangChain, AI coding assistants</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Experience</h2>
+                </div>
+                <div class="section-body">
+                    <ol class="timeline">
+                        <li>
+                            <span class="when">Mar 2023 – Present</span>
+                            <h3>Graduate Research Assistant</h3>
+                            <p class="where">Louisiana State University, Baton Rouge, LA. Advisors: Dr. José Romagnoli and Dr. Revati Kumar</p>
+                            <ul>
+                                <li>Built machine-learning and molecular-dynamics-informed pipelines (Python, PyTorch) to predict properties and optimize molecular design for surfactant and materials systems.</li>
+                                <li>Developed a graph-based model for critical micelle concentration reaching R² ≈ 0.94, published in <em>Computational Materials Science</em>.</li>
+                                <li>Extended a generative AI and reinforcement learning framework to multi-objective optimization, targeting several molecular properties at once.</li>
+                                <li>Created interactive analysis tools (Streamlit, Dash) and reproducible, version-controlled workflows, working across multidisciplinary teams.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="when">Jan 2025 – Dec 2025</span>
+                            <h3>Industry Research Collaboration</h3>
+                            <p class="where">Indorama Ventures, Louisiana and Texas. Mentor: Emily Barker</p>
+                            <ul>
+                                <li>Applied graph-based and deep-learning models to predict key molecular properties and guide formulation and design decisions.</li>
+                                <li>Engineered simulation-derived features that improved model robustness and generalization across diverse chemistries.</li>
+                                <li>Presented results to technical stakeholders and wrote concise summaries to support decisions and next-step planning.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="when">Jan 2023 – Present</span>
+                            <h3>Teaching Assistant</h3>
+                            <p class="where">Louisiana State University, Baton Rouge, LA</p>
+                            <ul>
+                                <li>Supports core courses in thermodynamics, chemical reaction engineering and process control, leading tutorials and office hours.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="when">Jun 2022 – Aug 2022</span>
+                            <h3>Quality Control Lab Intern</h3>
+                            <p class="where">Bercen Chemicals, LLC, Louisiana. Mentor: Tiffany Adkins</p>
+                            <ul>
+                                <li>Ran analytical quality control (GC, FTIR, HPLC, elemental analysis) and developed methods to support production and new pilot-plant operations.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <span class="when">May 2021 – Dec 2022</span>
+                            <h3>Graduate Researcher</h3>
+                            <p class="where">Southeastern Louisiana University, Hammond, LA. Advisor: Dr. Jean Fotie</p>
+                            <ul>
+                                <li>Carried out cross-dehydrogenative coupling syntheses with nano-dispersed palladium, platinum and cobalt catalysts, and co-authored peer-reviewed publications.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Publications</h2>
+                </div>
+                <div class="section-body">
+                    <ol class="pubs" reversed>
+                        <li>
+                            <span class="year">2026</span>
+                            <div>
+                                <div class="title"><a href="https://www.sciencedirect.com/science/article/pii/S0927025626000674" target="_blank" rel="noopener">Toward harnessing AI for surfactant chemistry: Prediction of critical micelle concentration</a></div>
+                                <p class="authors"><strong>Marchan, G. T.</strong>, et al. <em>Computational Materials Science</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="year">2026</span>
+                            <div>
+                                <div class="title"><a href="https://psecommunity.org/LAPSE:2026.0343" target="_blank" rel="noopener">Semi-supervised generative augmentation improves surfactant surface tension prediction from limited experimental data</a></div>
+                                <p class="authors"><strong>Theis Marchan, G. C.</strong>, et al. <em>Systems and Control Transactions</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="year">2025</span>
+                            <div>
+                                <div class="title"><a href="https://www.cetjournal.it/index.php/cet/article/view/15421" target="_blank" rel="noopener">VAE-assisted data augmentation for improved molecular prediction with graph neural networks (GNNs) in low-data regimes</a></div>
+                                <p class="authors"><strong>Marchan, G. C. T.</strong>, et al. <em>Chemical Engineering Transactions</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <div>
+                                <div class="title"><a href="https://doi.org/10.1021/acs.iecr.4c02469" target="_blank" rel="noopener">Graph-based modeling and molecular dynamics for ion activity coefficient prediction in polymeric ion-exchange membranes</a></div>
+                                <p class="authors">Naghshnejad, P., <strong>Marchan, G. T.</strong>, Olayiwola, T., Romagnoli, J., &amp; Kumar, R. <em>Industrial &amp; Engineering Chemistry Research</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="year">2024</span>
+                            <div>
+                                <div class="title"><a href="https://doi.org/10.1055/a-2326-6277" target="_blank" rel="noopener">Palladium nano-dispersed and stabilized in organically modified silicate as a heterogeneous catalyst for the conversion of aldehydes into O-silyl ether derivatives under neat conditions</a></div>
+                                <p class="authors">Matherne, C. M., Wroblewski, J. E., Drago, H. S., <strong>Marchan, G. T.</strong>, et al. <em>Synthesis</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="year">2022</span>
+                            <div>
+                                <div class="title"><a href="https://www.proquest.com/docview/2741031698" target="_blank" rel="noopener">Nano-dispersed metals in organically modified silicate as sustainable catalysts for cross-dehydrogenative couplings</a></div>
+                                <p class="authors"><strong>Marchan, G. T.</strong> <em>M.S. thesis, Southeastern Louisiana University</em></p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Education</h2>
+                </div>
+                <div class="section-body">
+                    <dl class="rows">
+                        <div>
+                            <dt>Ph.D., Chemical Engineering</dt>
+                            <dd class="date">Expected May 2027</dd>
+                            <dd class="detail">Louisiana State University, Baton Rouge, LA. GPA 3.6. Advisor: Dr. José Romagnoli</dd>
+                        </div>
+                        <div>
+                            <dt>M.S., Integrated Science &amp; Technology</dt>
+                            <dd class="date">Dec 2022</dd>
+                            <dd class="detail">Southeastern Louisiana University, Hammond, LA. Major in Industrial Chemistry. GPA 4.0</dd>
+                        </div>
+                        <div>
+                            <dt>B.S., Materials Science &amp; Engineering</dt>
+                            <dd class="date">Jul 2017</dd>
+                            <dd class="detail">Universidad Central de Venezuela, Caracas</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="wrap">
+                <div class="section-head">
+                    <h2>Skills</h2>
+                </div>
+                <div class="section-body">
+                    <dl class="rows skills">
+                        <div>
+                            <dt>Modeling &amp; optimization</dt>
+                            <dd>Predictive modeling, multi-objective optimization, molecular dynamics simulation (LAMMPS), reinforcement learning, Bayesian optimization</dd>
+                        </div>
+                        <div>
+                            <dt>Machine learning &amp; AI</dt>
+                            <dd>PyTorch, TensorFlow/Keras; GNNs, ANNs, DNNs, transformers, VAEs; LLMs and agentic AI pipelines; active and transfer learning; dimensionality reduction and clustering</dd>
+                        </div>
+                        <div>
+                            <dt>Data science &amp; programming</dt>
+                            <dd>Python (advanced), Pandas, NumPy, Scikit-learn, RDKit; automated data pipelines; Git; AI coding assistants (Claude Code, Codex, LangChain, Gemini); interactive apps (Streamlit, Dash); MATLAB (basic)</dd>
+                        </div>
+                        <div>
+                            <dt>Chemistry &amp; lab</dt>
+                            <dd>Analytical chemistry (GC-MS, HPLC, FTIR, NMR), catalyst synthesis, quality control</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <footer>
+        <div class="wrap">
+            <span>Gabriela Theis Marchan</span>
+            <a href="mailto:gtheis2@lsu.edu">gtheis2@lsu.edu</a>
+        </div>
+    </footer>
+
     <script>
-        // Simulate Teslim's loading behavior
-        function showLoading(message) {
-            const loading = document.getElementById('loading');
-            const loadingText = loading.querySelector('p');
-            loadingText.textContent = message;
-            loading.classList.add('show');
-        }
+        // Highlight the nav link for the section currently in view
+        const links = new Map(
+            [...document.querySelectorAll('.site-nav ul a')].map(a => [a.getAttribute('href').slice(1), a])
+        );
 
-        function hideLoading() {
-            const loading = document.getElementById('loading');
-            loading.classList.remove('show');
-        }
-
-        // Navigation functionality with loading simulation
-        function showSection(targetId) {
-            const sections = document.querySelectorAll('.section');
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            // Show loading
-            const loadingMessages = {
-                'about': 'Loading about section...',
-                'education': 'Loading education...',
-                'experience': 'Loading experience...',
-                'projects': 'Loading projects...',
-                'publications': 'Loading publications...',
-                'skills': 'Loading skills...'
-            };
-            
-            showLoading(loadingMessages[targetId] || 'Loading section...');
-            
-            // Hide all sections
-            sections.forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            // Remove active class from all nav links
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Simulate loading time
-            setTimeout(() => {
-                hideLoading();
-                
-                // Show target section
-                const targetSection = document.getElementById(targetId);
-                if (targetSection) {
-                    targetSection.classList.add('active');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                links.forEach(a => a.removeAttribute('aria-current'));
+                const link = links.get(entry.target.id);
+                if (link) {
+                    link.setAttribute('aria-current', 'true');
+                    // Keep the active link visible when the nav scrolls sideways on phones
+                    const list = link.closest('ul');
+                    list.scrollLeft = link.offsetLeft - (list.clientWidth - link.offsetWidth) / 2;
                 }
-                
-                // Add active class to clicked nav link
-                const activeLink = document.querySelector(`[href="#${targetId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('active');
-                }
-            }, 800);
-        }
-
-        // Add click event listeners to navigation links
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    showSection(targetId);
-                });
             });
+        }, { rootMargin: '-40% 0px -55% 0px' });
 
-            // Smooth scrolling for mobile
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        });
-
-        // Add some interactive hover effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate skill tags on hover
-            const skillTags = document.querySelectorAll('.skill-tag');
-            skillTags.forEach(tag => {
-                tag.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px) scale(1.05)';
-                });
-                
-                tag.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            // Add typing effect to mission statement
-            const mission = document.querySelector('.mission');
-            const text = mission.textContent;
-            mission.textContent = '';
-            
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    mission.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            }
-            
-            setTimeout(typeWriter, 1500);
+        links.forEach((_, id) => {
+            const section = document.getElementById(id);
+            if (section) observer.observe(section);
         });
     </script>
 </body>
